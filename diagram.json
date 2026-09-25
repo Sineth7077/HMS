@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "author": "COMP50069 - Scenario 2 - Automated Commercial Micro-Climate Nursery",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-breadboard-half",
+      "id": "bb1",
+      "top": -23.1,
+      "left": 128.1,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-breadboard-half",
+      "id": "bb2",
+      "top": -23.1,
+      "left": 310.5,
+      "rotate": 90,
+      "attrs": {}
+    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -52.9, "left": 331, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht22",
+      "top": -278.1,
+      "left": 119.4,
+      "attrs": { "temperature": "28", "humidity": "60" }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr",
+      "top": 156.8,
+      "left": -47.2,
+      "attrs": { "lux": "500" }
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled",
+      "top": -54.46,
+      "left": 710.63,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo",
+      "top": 228.4,
+      "left": 729.6,
+      "attrs": { "horn": "single" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 354,
+      "left": 347.4,
+      "rotate": 270,
+      "attrs": { "color": "white", "label": "Grow Light 1" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 322.8,
+      "left": 263,
+      "rotate": 270,
+      "attrs": { "color": "white", "label": "Grow Light 2" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 254.4,
+      "left": 316.25,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 254.4,
+      "left": 258.65,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "manualBtn",
+      "top": 15.8,
+      "left": 86.4,
+      "rotate": 180,
+      "attrs": { "color": "blue", "label": "Manual Override" }
+    }
+  ],
+  "connections": [
+    [ "r1:2", "led1:A", "magenta", [] ],
+    [ "r2:2", "led2:A", "violet", [] ],
+    [ "dht22:VCC", "bb2:18b.h", "red", [ "v19.2", "h326.4", "v249.6" ] ],
+    [ "dht22:SDA", "bb2:16b.h", "green", [ "v9.6", "h345.7", "v240" ] ],
+    [ "dht22:GND", "bb1:17t.c", "black", [ "v0" ] ],
+    [ "ldr:VCC", "bb2:18b.g", "red", [ "h0" ] ],
+    [ "ldr:GND", "bb1:17t.d", "black", [ "h0" ] ],
+    [ "ldr:AO", "bb1:7t.c", "blue", [ "h134.4", "v-202.3" ] ],
+    [ "oled:VCC", "bb2:18b.f", "red", [ "v-28.8", "h-201.45", "v182.4" ] ],
+    [ "oled:GND", "bb2:17b.h", "black", [ "v-19.2", "h-249.6", "v163.2" ] ],
+    [ "oled:SCL", "bb2:5b.h", "yellow", [ "v-38.4", "h-297.3", "v67.2" ] ],
+    [ "oled:SDA", "bb2:8b.h", "cyan", [ "v-57.6", "h-239.93", "v115.2" ] ],
+    [ "servo:GND", "bb2:17b.g", "black", [ "h-249.6", "v-182.4" ] ],
+    [ "servo:V+", "bb1:18t.d", "red", [ "h0" ] ],
+    [ "bb2:10b.h", "servo:PWM", "green", [ "h201.6", "v201.6" ] ],
+    [ "r1:1", "bb1:11t.c", "magenta", [ "h0" ] ],
+    [ "r2:1", "bb1:12t.c", "violet", [ "h0", "v-192" ] ],
+    [ "led2:C", "bb1:17t.g", "black", [ "v76.8", "h163.6" ] ],
+    [ "manualBtn:1.l", "bb1:13t.d", "#8f4814", [ "h0" ] ],
+    [ "manualBtn:2.l", "bb1:17t.e", "orange", [ "h0" ] ],
+    [ "led1:C", "bb1:17t.f", "black", [ "h0" ] ],
+    [ "led2:C", "bb2:17b.f", "black", [ "h0" ] ],
+    [ "led1:C", "bb2:17b.f", "black", [ "h0" ] ],
+    [ "esp:VIN", "bb1:18t.b", "", [ "$bb" ] ],
+    [ "esp:GND.2", "bb1:17t.b", "", [ "$bb" ] ],
+    [ "esp:D13", "bb1:16t.b", "", [ "$bb" ] ],
+    [ "esp:D12", "bb1:15t.b", "", [ "$bb" ] ],
+    [ "esp:D14", "bb1:14t.b", "", [ "$bb" ] ],
+    [ "esp:D27", "bb1:13t.b", "", [ "$bb" ] ],
+    [ "esp:D26", "bb1:12t.b", "", [ "$bb" ] ],
+    [ "esp:D25", "bb1:11t.b", "", [ "$bb" ] ],
+    [ "esp:D33", "bb1:10t.b", "", [ "$bb" ] ],
+    [ "esp:D32", "bb1:9t.b", "", [ "$bb" ] ],
+    [ "esp:D35", "bb1:8t.b", "", [ "$bb" ] ],
+    [ "esp:D34", "bb1:7t.b", "", [ "$bb" ] ],
+    [ "esp:VN", "bb1:6t.b", "", [ "$bb" ] ],
+    [ "esp:VP", "bb1:5t.b", "", [ "$bb" ] ],
+    [ "esp:EN", "bb1:4t.b", "", [ "$bb" ] ],
+    [ "esp:3V3", "bb2:18b.i", "", [ "$bb" ] ],
+    [ "esp:GND.1", "bb2:17b.i", "", [ "$bb" ] ],
+    [ "esp:D15", "bb2:16b.i", "", [ "$bb" ] ],
+    [ "esp:D2", "bb2:15b.i", "", [ "$bb" ] ],
+    [ "esp:D4", "bb2:14b.i", "", [ "$bb" ] ],
+    [ "esp:RX2", "bb2:13b.i", "", [ "$bb" ] ],
+    [ "esp:TX2", "bb2:12b.i", "", [ "$bb" ] ],
+    [ "esp:D5", "bb2:11b.i", "", [ "$bb" ] ],
+    [ "esp:D18", "bb2:10b.i", "", [ "$bb" ] ],
+    [ "esp:D19", "bb2:9b.i", "", [ "$bb" ] ],
+    [ "esp:D21", "bb2:8b.i", "", [ "$bb" ] ],
+    [ "esp:RX0", "bb2:7b.i", "", [ "$bb" ] ],
+    [ "esp:TX0", "bb2:6b.i", "", [ "$bb" ] ],
+    [ "esp:D22", "bb2:5b.i", "", [ "$bb" ] ],
+    [ "esp:D23", "bb2:4b.i", "", [ "$bb" ] ]
+  ],
+  "dependencies": {}
+}
